@@ -1,0 +1,53 @@
+<h2 class="text-center">Registrarse</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="card">
+  <div class="card-header">
+    <div class="text-center">Crear Usuario</div>
+  </div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Nombre</span>
+      <%= f.text_field :name, autofocus: true,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Apellido</span>
+      <%= f.text_field :lastname,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Localidad</span>
+      <%= f.text_field :locality,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Direccion</span>
+      <%= f.text_field :address,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Numero de Telefono</span>
+      <%= f.number_field :phone_number,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Email</span>
+      <%= f.email_field :email, autofocus: true, class:'form-control mb-3'%>
+    </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text mb-3">Contraseña</span>
+    <%= f.password_field :password, placeholder: "#{@minimum_password_length} caracteres como minimo" , class:'form-control mb-3'%>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text mb-3">Confirmar contraseña</span>
+    <%= f.password_field :password_confirmation, placeholder: "#{@minimum_password_length} caracteres como minimo" , class:'form-control mb-3'%>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit "Registrarse", class:'btn btn-outline-success' %>
+  </div>
+<% end %>

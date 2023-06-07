@@ -1,0 +1,63 @@
+<div class="text-center">
+  <h1>Orden n° <%= @order.id%></h1>
+</div>
+
+<% @order.order_items.each do |item|%>
+<div class="accordion" id="accordionExample" style="padding:2%">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=item.product.id%>" aria-expanded="true" aria-controls="collapseOne">
+          <%= item.product.name%>
+      </button>
+    </h2>
+  <div id="collapse<%=item.product.id%>" class="accordion-collapse collapse hidden" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+  <div class="accordion-body">
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">  
+        <%if item.product.image.attached? %>
+          <%= image_tag item.product.image , class:"img-fluid img-thumbnail rounded-start", style:'width:200px; height:200px'%>
+        <%else%>
+          <%= image_tag "no_image.png",class:'img-fluid rounded-start' %>
+        <%end%>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5>Descripcion: <%= item.product.description%></h5>
+          <h5>Modelo: <%= item.product.model%></h5>
+          <h5>Marca:<%= item.product.brand%></h5>
+          <h5>Precio unitario: $<%= item.product.price.to_i%></h5>
+          <h5>Cantidad: <%= item.quantity%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<% end %>
+<div style="padding:2%">
+  <div class="card text-center mt-3">
+    <div class="card-header">
+      Datos de la orden
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Total de la orden: $<%= @order.subtotal.to_i%></li>
+        <li class="list-group-item">Titular de la orden: <%= @order.user.name%> <%= @order.user.lastname%></li>
+        <li class="list-group-item">Direccion de entrega de la orden: <%= @order.user.address%></li>
+      </ul>
+    </div>
+    <% if  @order.fecha_confirmacion.present?%>  
+        <div class="card-footer text-muted">
+          Generada el dia <%= @order.fecha_confirmacion.strftime("%d-%m-%Y a las %H:%M")%>
+        </div>
+    <% else %>
+        <div class="card-footer text-muted">
+          Orden sin confirmar
+        </div>
+    <% end %>
+  </div>
+</div>

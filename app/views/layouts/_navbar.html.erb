@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid"> 
+    <a class="navbar-brand" >
+      <i class="fa-solid fa-mobile-screen-button"></i>
+    </a>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href=<%= root_path%>>
+            <%if user_signed_in? && current_user.admin?%>
+              Vista del cliente
+            <%else%>
+              Pagina Principal
+            <% end %>
+          </a>
+        </li>
+        <%if user_signed_in?%>
+          <%if current_user.admin?%>
+            <li class="nav-item">
+              <a class="nav-link" href="<%=admin_index_path%>">Mi tienda</a>
+            </li>
+          <%else%>
+            <li class="nav-item">
+              <a class="nav-link" href="<%=orders_path%>">Mis Ordenes</a>
+            </li>
+          <% end %>
+        <%end%>
+      </ul>
+
+      <% if !user_signed_in? || current_user.client? %>
+        <div class="dropdown mx-3">
+          <a class="btn btn-secondary" href="<%= cart_show_path%>">
+              <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+        </div>
+        <%end%>
+      <%if (user_signed_in?) %>
+       <div class="btn-group dropstart">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-circle-user"></i> 
+            <a><%= current_user.name.humanize%></a> 
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item"><%= link_to "Editar", edit_user_registration_path, class:'dropdown-item' %></a></li>
+            <li><a class="dropdown-item"><%= link_to 'Desconectarse', destroy_user_session_path , method: :delete, data: { confirm: 'Are you sure?' }, class:'dropdown-item'%></a></li>
+          </ul> 
+          </div>
+      <%else %>
+   
+        <div class="btn-group dropstart">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-circle-user"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="<%= new_user_session_path%>">Iniciar sesion</a></li>
+            <li><a class="dropdown-item" href="<%= new_user_registration_path%>">Registrarse</a></li>
+          </ul> 
+          </div>
+
+      <%end%>
+    </div>
+  </div>
+  
+</nav>

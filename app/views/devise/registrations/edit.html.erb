@@ -1,0 +1,81 @@
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource,class:"alert alert-primary" %>
+<div class="card">
+  <div class="card-header">
+    <div class="text-center">Editar Usuario</div>
+  </div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Nombre</span>
+      <%= f.text_field :name, autofocus: true,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Apellido</span>
+      <%= f.text_field :lastname,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Localidad</span>
+      <%= f.text_field :locality,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Direccion</span>
+      <%= f.text_field :address,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Numero de Telefono</span>
+      <%= f.number_field :phone_number,class:'form-control mb-3' %>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Email</span>
+      <%= f.email_field :email, autocomplete: "email" ,class:'form-control mb-3' %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Nueva contraseña</span>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder:'6 caracteres como minimo (Dejar en blanco si no desea cambiarla)',class:'form-control mb-3' %>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Repetir nueva contraseña</span>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:'6 caracteres como minimo (Dejar en blanco si no desea cambiarla)', class:'form-control mb-3' %>
+    </div>
+
+
+    <div class="input-group mb-3">
+      <span class="input-group-text mb-3">Contraseña</span>
+      <%= f.password_field :current_password, class:'form-control mb-3'%>
+    </div>
+
+      <div class="d-grid">
+      <%= f.submit "Actualizar", class:'btn btn-lg btn-outline-success fw-bold mb-2' %>
+      </div>
+      
+<% end %>
+
+<div class="accordion-item mb-3">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+       Eliminar cuenta
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            <%= link_to "Cancela tu cuenta", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:'btn btn-danger' %></p>
+      </div>
+    </div>
+</div>
+  <div class="d-grid">
+    <%= link_to "Atras", :back, class:'btn btn-secondary' %>   
+  </div>
+
+

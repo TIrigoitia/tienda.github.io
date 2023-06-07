@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<div class="text-center">
+  <h1>Productos disponibles</h1>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @products.each do |product| %>
+     <div class="card mx-2 mt-3" style="max-width: 18rem">
+        <%if product.image.attached?%>
+        <%= image_tag product.image, class:"card-img-top",style:'width:300px; height:300px'%>
+        <%else%>
+          <%= image_tag "no_image.png",class:'card-img-top',style:'height:262px; width:262px ' %>
+        <%end%>
+      <div class="card-body">
+        <h5 class="card-title"><%= product.name%></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Precio: $<%= product.price.to_i%></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Modelo: <%= product.model %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Descripcion: <%= product.description %></h6>
+        <h6 class="card-subtitle mb-2 text-muted">Marca: <%= product.brand %></h6>
+        <%= link_to 'Detalles', product, class:'btn btn-outline-primary' %>
+        <% if user_signed_in? && current_user.client?%>
+          <%= form_for @order_item, remote: true do |f|%>
+            <div class="input-group mb-3">
+              <%=f.hidden_field :product_id, :value => product.id%>
+              <%= f.number_field :quantity, :value => 1, :min => 1, class:'form-control form-control-sm'%>
+              <%if product.stock%>
+                <%= f.submit "Agregar al carrito", class:'btn btn-sm btn-outline-success'%>
+              <% else %>
+                <%= f.submit "Agregar al carrito", class:'btn btn-sm btn-outline-success disabled'%>
+                <h6 class="text-muted">Fuera de stock</h6>
+              <% end %>
+            </div>
+          <% end %>
+        <%elsif !user_signed_in? %>
+          <li class="list-group-item"><h6 class="text-muted">Debe inciar sesion para agregar items al carrito</h6></li>
+        <%end%>
+    </div>
+    </div>
+  <% end %>
+</div>
+
+   

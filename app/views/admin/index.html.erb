@@ -1,0 +1,36 @@
+<div style="padding:1%">
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item ">
+      <a class="nav-link" href="<%= admin_orders_path%>">Ordenes</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<%= admin_products_path%>">Productos</a>
+    </li>
+   </ul>
+   <div class="card padding:2%">
+  <h3 class="text-center">Ultimas ordenes</h3>
+  <div class="row row-cols-1 row-cols-md-2 g-4 ">
+  <div class="col ">
+    <div class="card mx-3 my-3">
+      <div class="card-body">
+        <h5 class="card-title">Orden n° <%= @ultimas_ordenes[0].first.id%></h5>
+        <p class="card-text">Monto: $<%=@ultimas_ordenes[0].first.subtotal.to_i %>
+        <p class="card-text">Estado: <%=@ultimas_ordenes[0].first.status.humanize %></p>
+        <%= link_to 'Detalles', admin_show_order_path(:id => @ultimas_ordenes[0].first.id), class:'btn btn-sm btn-outline-primary' %>        
+      </div>
+    </div>
+  </div>
+  <div class="col ">
+    <div class="card mx-3 my-3">
+      <div class="card-body">
+        <h5 class="card-title">Orden n° <%= @ultimas_ordenes[1].id%></h5>
+        <p class="card-text">Monto: $<%=@ultimas_ordenes[1].subtotal.to_i %>      
+        <p class="card-text">Estado: <%=@ultimas_ordenes[1].status.humanize %></p>
+        <%= link_to 'Detalles', admin_show_order_path(:id => @ultimas_ordenes[1].id), class:'btn btn-sm btn-outline-primary' %>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</div>
+</div>

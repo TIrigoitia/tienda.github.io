@@ -1,0 +1,10 @@
+<h1 class="text-center">Editar producto</h1>
+
+<%= render 'form', product: @product %>
+
+<div class="text-center mt-3">
+<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <%= link_to 'Mostrar producto', @product , class:'btn btn-outline-primary'%>
+  <%= link_to 'Atras', products_path, class:'btn btn-outline-secondary' %>
+</div>
+</div>
